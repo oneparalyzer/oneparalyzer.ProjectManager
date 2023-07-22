@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace oneparalyzer.ProjectManager.Application.Companies.Commands.Remove;
+namespace oneparalyzer.ProjectManager.Application.Companies.Commands.RemoveById;
 
 public sealed class RemoveCompanyByIdCommandValidator : AbstractValidator<RemoveCompanyByIdCommand>
 {

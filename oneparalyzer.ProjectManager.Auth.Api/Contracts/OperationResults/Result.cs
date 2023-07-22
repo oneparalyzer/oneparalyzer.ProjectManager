@@ -1,4 +1,4 @@
-﻿namespace oneparalyzer.ProjectManager.Domain.Common.OperationResults;
+﻿namespace oneparalyzer.ProjectManager.Auth.Api.Contracts.OperationResults;
 
 public class Result<TData> : SimpleResult
 {

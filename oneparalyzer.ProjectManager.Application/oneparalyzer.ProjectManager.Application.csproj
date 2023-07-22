@@ -18,4 +18,8 @@
     <ProjectReference Include="..\oneparalyzer.ProjectManager.Domain\oneparalyzer.ProjectManager.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Offices\" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,9 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using oneparalyzer.ProjectManager.Application.Companies.Commands.Create;
-using oneparalyzer.ProjectManager.Application.Companies.Commands.Remove;
+using oneparalyzer.ProjectManager.Application.Companies.Commands.RemoveById;
+using oneparalyzer.ProjectManager.Application.Companies.Queries.GetById;
+using oneparalyzer.ProjectManager.Application.Companies.Queries.GetByPage;
 using System.Reflection;
 
 namespace oneparalyzer.ProjectManager.Application;
@@ -21,6 +23,8 @@ public static class DependencyInjection
     {
         services.AddTransient<IValidator<CreateCompanyCommand>, CreateCompanyCommandValidator>();
         services.AddTransient<IValidator<RemoveCompanyByIdCommand>, RemoveCompanyByIdCommandValidator>();
+        services.AddTransient<IValidator<GetCompanyByIdQuery>, GetCompanyByIdQueryValidator>();
+        services.AddTransient<IValidator<GetCompaniesByPageQuery>, GetCompaniesByPageQueryValidator>();
         return services;
     }
 }

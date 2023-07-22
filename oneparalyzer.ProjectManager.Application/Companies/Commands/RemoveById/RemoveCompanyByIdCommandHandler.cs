@@ -1,5 +1,5 @@
-﻿using MediatR;
-using FluentValidation;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using oneparalyzer.ProjectManager.Application.Common.Interfaces;
@@ -7,25 +7,25 @@ using oneparalyzer.ProjectManager.Domain.AggregateModels.CompanyAggregate;
 using oneparalyzer.ProjectManager.Domain.AggregateModels.CompanyAggregate.ValueObjects;
 using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-namespace oneparalyzer.ProjectManager.Application.Companies.Commands.Create;
+namespace oneparalyzer.ProjectManager.Application.Companies.Commands.RemoveById;
 
-public sealed class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand, SimpleResult>
+public sealed class RemoveCompanyByIdCommandHandler : IRequestHandler<RemoveCompanyByIdCommand, SimpleResult>
 {
     private readonly IApplicationDbContext _context;
-    private readonly IValidator<CreateCompanyCommand> _validator;
-    private readonly ILogger<CreateCompanyCommandHandler> _logger;
+    private readonly IValidator<RemoveCompanyByIdCommand> _validator;
+    private readonly ILogger<RemoveCompanyByIdCommandHandler> _logger;
 
-    public CreateCompanyCommandHandler(
+    public RemoveCompanyByIdCommandHandler(
         IApplicationDbContext context,
-        IValidator<CreateCompanyCommand> validator,
-        ILogger<CreateCompanyCommandHandler> logger)
+        IValidator<RemoveCompanyByIdCommand> validator,
+        ILogger<RemoveCompanyByIdCommandHandler> logger)
     {
         _context = context;
         _validator = validator;
         _logger = logger;
     }
 
-    public async Task<SimpleResult> Handle(CreateCompanyCommand request, CancellationToken cancellationToken)
+    public async Task<SimpleResult> Handle(RemoveCompanyByIdCommand request, CancellationToken cancellationToken)
     {
         var result = new SimpleResult();
 
@@ -39,27 +39,23 @@ public sealed class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyC
             }
 
             Company? company = await _context.Companies
-            .FirstOrDefaultAsync(x =>
-                x.Title == request.Title,
-                cancellationToken);
-            if (company is not null)
+                .FirstOrDefaultAsync(x => 
+                    x.Id == CompanyId.Create(request.Id),
+                    cancellationToken);
+            if (company is null)
             {
-                result.AddError("Компания с таким названием уже существует.");
+                result.AddError("Офис не найден.");
                 return result;
             }
 
-            company = new Company(
-                CompanyId.Create(),
-                request.Title);
-
-            await _context.Companies.AddAsync(company, cancellationToken);
+            _context.Companies.Remove(company);
             await _context.SaveChangesAsync(cancellationToken);
 
             return result;
         }
         catch (Exception ex)
         {
-            result.AddError("Произошла ошиюбка.");
+            result.AddError("Произошла ошибка.");
             _logger.LogError(ex.Message);
             return result;
         }

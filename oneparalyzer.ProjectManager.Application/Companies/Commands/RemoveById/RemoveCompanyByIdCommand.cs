@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-namespace oneparalyzer.ProjectManager.Application.Companies.Commands.Remove;
+namespace oneparalyzer.ProjectManager.Application.Companies.Commands.RemoveById;
 
 public record RemoveCompanyByIdCommand(
     Guid Id) : IRequest<SimpleResult>;
