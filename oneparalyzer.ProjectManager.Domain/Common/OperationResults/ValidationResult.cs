@@ -4,7 +4,7 @@ public class ValidationResult
 {
     private IDictionary<string, string[]> errors = new Dictionary<string, string[]>();
 
-    public bool IsValid { get; private set; }
+    public bool IsValid { get; private set; } = true;
     public IDictionary<string, string[]> Errors
     {
         get => errors;

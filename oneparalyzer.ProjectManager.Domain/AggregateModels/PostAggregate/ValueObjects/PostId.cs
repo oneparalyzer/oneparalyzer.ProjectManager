@@ -1,5 +1,4 @@
 ﻿using oneparalyzer.ProjectManager.Domain.Common.ValueObjects;
-using oneparalyzer.ProjectManger.Domain.AggregateModels.DepartmentAggregate.ValueObjects;
 
 namespace oneparalyzer.ProjectManager.Domain.AggregateModels.PostAggregate.ValueObjects;
 

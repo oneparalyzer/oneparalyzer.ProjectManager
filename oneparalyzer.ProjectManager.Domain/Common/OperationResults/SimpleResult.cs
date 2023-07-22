@@ -9,15 +9,16 @@ public class SimpleResult
 
     public void AddError(string error)
     {
-        if (Succeed)
-        {
-            Succeed = false;
-        }
-
+        Succeed = false;
         var existingError = _errors.FirstOrDefault(x => x == error);
         if (string.IsNullOrWhiteSpace(existingError))
         {
             _errors.Add(error);
         }
+    }
+
+    public void AddValidationErrors(IDictionary<string, string[]> validationErrors)
+    {
+        ValidationResult.Errors = validationErrors;
     }
 }

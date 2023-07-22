@@ -19,9 +19,6 @@ public sealed class ProjectTask : Entity<ProjectTaskId>
         ResponsibleEmployeeId = responsibleEmployeeId;
     }
 
-    private ProjectTask(ProjectTaskId id) : base(id) { }
-
-
     public int Number { get; private set; }
     public string Description { get; private set; }
     public bool IsCompleted { get; private set; }

@@ -8,6 +8,7 @@ using oneparalyzer.ProjectManager.Domain.AggregateModels.PostAggregate;
 using oneparalyzer.ProjectManager.Domain.AggregateModels.ProjectAggregate.Entities;
 using oneparalyzer.ProjectManager.Domain.AggregateModels.ProjectAggregate;
 using System.Reflection;
+using oneparalyzer.ProjectManager.Infrastructure.Persistance.EntityTypeConfigurations;
 
 namespace oneparalyzer.ProjectManager.Infrastructure.Persistance;
 

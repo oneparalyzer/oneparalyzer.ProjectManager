@@ -8,11 +8,11 @@ namespace oneparalyzer.ProjectManager.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services, ConfigurationManager configuration)
+    public static IServiceCollection AddInfrasructure(this IServiceCollection services, ConfigurationManager configuration)
     {
-        string? connectionString = configuration.GetConnectionString("MYSQL");
+        string? connectionString = configuration.GetConnectionString("MSSQL");
         services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options => 
-            options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 34))));
+            options.UseSqlServer(connectionString));
         return services;
     }
 }

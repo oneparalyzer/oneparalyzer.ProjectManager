@@ -17,7 +17,7 @@ public sealed class CompanyConfiguration : IEntityTypeConfiguration<Company>
                 id => id.Value, 
                 value => CompanyId.Create(value));
 
-        builder.Property(x => x.Title).IsRequired();
+        builder.Property(x => x.Title).HasMaxLength(50).IsRequired();
 
         builder.HasIndex(x => x.Title);
 

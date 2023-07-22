@@ -21,7 +21,7 @@ public sealed class Project : AggregateRoot<ProjectId>
     public string Title { get; private set; }
     public EmployeeId EmployeeId { get; private set; }
 
-    public IReadOnlyList<ProjectTask> Tasks => _projectTasks.AsReadOnly();
+    public IReadOnlyList<ProjectTask> ProjectTasks => _projectTasks.AsReadOnly();
 
     public SimpleResult AddProjectTask(ProjectTask projectTask)
     {

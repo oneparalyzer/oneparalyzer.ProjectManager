@@ -4,6 +4,9 @@ using oneparalyzer.ProjectManager.Domain.AggregateModels.DepartmentAggregate.Val
 using oneparalyzer.ProjectManager.Domain.AggregateModels.EmployeeAggregate;
 using oneparalyzer.ProjectManager.Domain.AggregateModels.EmployeeAggregate.ValueObjects;
 using oneparalyzer.ProjectManager.Domain.AggregateModels.PostAggregate.ValueObjects;
+using oneparalyzer.ProjectManager.Domain.AggregateModels.ProjectAggregate;
+using oneparalyzer.ProjectManager.Domain.AggregateModels.ProjectAggregate.Entities;
+using oneparalyzer.ProjectManager.Domain.Common.ValueObjects;
 
 namespace oneparalyzer.ProjectManager.Infrastructure.Persistance.EntityTypeConfigurations;
 
@@ -23,6 +26,11 @@ public sealed class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
                 id => id.Value,
                 value => PostId.Create(value));
 
+        builder.Property(x => x.UserId)
+            .HasConversion(
+                id => id.Value,
+                value => UserId.Create(value));
+
         builder.OwnsOne(x => x.FullName)
             .Property(x => x.Surname)
             .HasColumnName("Surname")
@@ -37,5 +45,8 @@ public sealed class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
             .Property(x => x.Patronymic)
             .HasColumnName("Patronymic")
             .IsRequired();
+
+        builder.HasMany<Project>().WithOne().HasForeignKey(x => x.EmployeeId);
+        builder.HasMany<ProjectTask>().WithOne().HasForeignKey(x => x.ResponsibleEmployeeId);
     }
 }
