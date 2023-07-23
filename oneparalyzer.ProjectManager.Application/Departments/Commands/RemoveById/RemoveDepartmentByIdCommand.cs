@@ -1,3 +1,7 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Departments.Commands.RemoveById;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public record RemoveDepartmentByIdCommand();
+namespace oneparalyzer.ProjectManager.Application.Departments.Commands.RemoveById;
+
+public record RemoveDepartmentByIdCommand(
+    Guid Id) : IRequest<SimpleResult>;

@@ -1,6 +1,9 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Departments.Commands.Update;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public class UpdateDepartmentCommand
-{
-    
-}
+namespace oneparalyzer.ProjectManager.Application.Departments.Commands.Update;
+
+public record UpdateDepartmentCommand(
+    Guid Id,
+    string NewTitle,
+    Guid NewOfficeId) : IRequest<SimpleResult>;

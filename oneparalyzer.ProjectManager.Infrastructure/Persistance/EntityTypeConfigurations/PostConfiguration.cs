@@ -24,6 +24,8 @@ public sealed class PostConfiguration : IEntityTypeConfiguration<Post>
                 id => id.Value,
                 value => DepartmentId.Create(value));
 
+        builder.Property(x => x.Title).HasMaxLength(50).IsRequired();
+
         builder.HasMany<Employee>().WithOne().HasForeignKey(x => x.PostId);
     }
 }

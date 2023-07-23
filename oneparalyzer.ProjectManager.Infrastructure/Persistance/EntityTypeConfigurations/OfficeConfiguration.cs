@@ -24,7 +24,7 @@ public sealed class OfficeConfiguration : IEntityTypeConfiguration<Office>
                 id => id.Value,
                 value => CompanyId.Create(value));
 
-        builder.Property(x => x.Title).IsRequired();
+        builder.Property(x => x.Title).HasMaxLength(50).IsRequired();
 
         builder.HasMany<Department>().WithOne().HasForeignKey(x => x.OfficeId);
     }

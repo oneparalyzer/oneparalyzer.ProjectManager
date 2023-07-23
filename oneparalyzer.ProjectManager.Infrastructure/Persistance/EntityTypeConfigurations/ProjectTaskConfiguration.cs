@@ -24,7 +24,7 @@ public sealed class ProjectTaskConfiguration : IEntityTypeConfiguration<ProjectT
                 value => EmployeeId.Create(value));
 
         builder.Property(x => x.Number).IsRequired();
-        builder.Property(x => x.Description).IsRequired();
+        builder.Property(x => x.Description).HasMaxLength(400).IsRequired();
 
         
     }

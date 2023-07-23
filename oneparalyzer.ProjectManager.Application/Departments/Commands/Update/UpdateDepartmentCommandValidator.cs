@@ -1,6 +1,13 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Departments.Commands.Update;
+﻿using FluentValidation;
 
-public class UpdateDepartmentCommandValidator
+namespace oneparalyzer.ProjectManager.Application.Departments.Commands.Update;
+
+public sealed class UpdateDepartmentCommandValidator : AbstractValidator<UpdateDepartmentCommand>
 {
-    
+    public UpdateDepartmentCommandValidator()
+    {
+        RuleFor(x => x.Id).NotEqual(Guid.Empty);
+        RuleFor(x => x.NewTitle).MinimumLength(5).MaximumLength(50);
+        RuleFor(x => x.NewOfficeId).NotEqual(Guid.Empty);
+    }
 }

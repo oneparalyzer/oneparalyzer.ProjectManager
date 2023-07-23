@@ -1,6 +1,8 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Offices.Queries.GetByPage;
+﻿using oneparalyzer.ProjectManager.Application.Offices.Queries.GetById;
 
-public class GetOfficesByPageModel
+namespace oneparalyzer.ProjectManager.Application.Offices.Queries.GetByPage;
+
+public class GetOfficesByPageModel : GetOfficeByIdModel
 {
     
 }

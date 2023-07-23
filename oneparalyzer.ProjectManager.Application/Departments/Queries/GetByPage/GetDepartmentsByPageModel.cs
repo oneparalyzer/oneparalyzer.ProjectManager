@@ -1,6 +1,8 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Departments.Queries.GetByPage;
+﻿using oneparalyzer.ProjectManager.Application.Departments.Queries.GetById;
 
-public class GetDepartmentsByPageModel
+namespace oneparalyzer.ProjectManager.Application.Departments.Queries.GetByPage;
+
+public class GetDepartmentsByPageModel : GetDepartmentByIdModel
 {
     
 }

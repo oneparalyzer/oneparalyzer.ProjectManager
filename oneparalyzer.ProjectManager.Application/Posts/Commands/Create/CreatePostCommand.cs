@@ -1,6 +1,8 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Posts.Commands.Create;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public class CreatePostCommand
-{
-    
-}
+namespace oneparalyzer.ProjectManager.Application.Posts.Commands.Create;
+
+public record CreatePostCommand(
+    string Title,
+    Guid DepartmentId) : IRequest<SimpleResult>;

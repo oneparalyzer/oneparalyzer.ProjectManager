@@ -10,11 +10,11 @@ namespace oneparalyzer.ProjectManager.Api.Controllers;
 
 [Route("companies")]
 [ApiController]
-public class CompanyController : ControllerBase
+public class CompaniesController : ControllerBase
 {
     private readonly ISender _mediator;
 
-    public CompanyController(ISender mediator)
+    public CompaniesController(ISender mediator)
     {
         _mediator = mediator;
     }

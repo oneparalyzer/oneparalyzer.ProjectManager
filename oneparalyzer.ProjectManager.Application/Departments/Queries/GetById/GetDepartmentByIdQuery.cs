@@ -1,3 +1,7 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Departments.Queries.GetById;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public record GetDepartmentByIdQuery();
+namespace oneparalyzer.ProjectManager.Application.Departments.Queries.GetById;
+
+public record GetDepartmentByIdQuery(
+    Guid Id) : IRequest<Result<GetDepartmentByIdModel>>;

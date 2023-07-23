@@ -3,31 +3,31 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using oneparalyzer.ProjectManager.Application.Common.Interfaces;
-using oneparalyzer.ProjectManager.Domain.AggregateModels.DepartmentAggregate;
-using oneparalyzer.ProjectManager.Domain.AggregateModels.DepartmentAggregate.ValueObjects;
+using oneparalyzer.ProjectManager.Domain.AggregateModels.CompanyAggregate;
+using oneparalyzer.ProjectManager.Domain.AggregateModels.CompanyAggregate.ValueObjects;
 using oneparalyzer.ProjectManager.Domain.AggregateModels.OfficeAggregate;
 using oneparalyzer.ProjectManager.Domain.AggregateModels.OfficeAggregate.ValueObjects;
 using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-namespace oneparalyzer.ProjectManager.Application.Departments.Commands.Create;
+namespace oneparalyzer.ProjectManager.Application.Offices.Commands.Create;
 
-public sealed class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, SimpleResult>
+public sealed class CreateOfficeCommandHandler : IRequestHandler<CreateOfficeCommand, SimpleResult>
 {
     private readonly IApplicationDbContext _context;
-    private readonly IValidator<CreateDepartmentCommand> _validator;
-    private readonly ILogger<CreateDepartmentCommandHandler> _logger;
+    private readonly IValidator<CreateOfficeCommand> _validator;
+    private readonly ILogger<CreateOfficeCommandHandler> _logger;
 
-    public CreateDepartmentCommandHandler(
+    public CreateOfficeCommandHandler(
         IApplicationDbContext context,
-        IValidator<CreateDepartmentCommand> validator,
-        ILogger<CreateDepartmentCommandHandler> logger)
+        IValidator<CreateOfficeCommand> validator,
+        ILogger<CreateOfficeCommandHandler> logger)
     {
         _context = context;
         _validator = validator;
         _logger = logger;
     }
-    
-    public async Task<SimpleResult> Handle(CreateDepartmentCommand request, CancellationToken cancellationToken)
+
+    public async Task<SimpleResult> Handle(CreateOfficeCommand request, CancellationToken cancellationToken)
     {
         var result = new SimpleResult();
 
@@ -40,22 +40,22 @@ public sealed class CreateDepartmentCommandHandler : IRequestHandler<CreateDepar
                 return result;
             }
 
-            Office? existingOffice = await _context.Offices
-                .FirstOrDefaultAsync(x => 
-                        x.Id == OfficeId.Create(request.OfficeId),
+            Company? existingCompany = await _context.Companies
+                .FirstOrDefaultAsync(x =>
+                    x.Id == CompanyId.Create(request.CompanyId),
                     cancellationToken);
-            if (existingOffice is null)
+            if (existingCompany is null)
             {
-                result.AddError("Офис не найден.");
+                result.AddError("Компания не найдена.");
                 return result;
             }
 
-            var department = new Department(
-                DepartmentId.Create(),
+            var office = new Office(
+                OfficeId.Create(),
                 request.Title,
-                OfficeId.Create(request.OfficeId));
+                CompanyId.Create(request.CompanyId));
 
-            await _context.Departments.AddAsync(department, cancellationToken);
+            await _context.Offices.AddAsync(office, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             
             return result;

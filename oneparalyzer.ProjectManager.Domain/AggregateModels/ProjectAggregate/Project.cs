@@ -12,10 +12,11 @@ public sealed class Project : AggregateRoot<ProjectId>
 
     private Project(ProjectId id) : base(id) { }
 
-    public Project(ProjectId id, string title, List<ProjectTask> projectTasks) : base(id)
+    public Project(ProjectId id, string title, EmployeeId employeeId, List<ProjectTask> projectTasks) : base(id)
     {
         _projectTasks = projectTasks;
         Title = title;
+        EmployeeId = employeeId;
     }
 
     public string Title { get; private set; }

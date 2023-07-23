@@ -22,7 +22,7 @@ public sealed class DepartmentConfiguration : IEntityTypeConfiguration<Departmen
                 id => id.Value,
                 value => OfficeId.Create(value));
 
-        builder.Property(x => x.Title).IsRequired();
+        builder.Property(x => x.Title).HasMaxLength(50).IsRequired();
 
         builder.HasMany<Post>().WithOne().HasForeignKey(x => x.DepartmentId);
     }

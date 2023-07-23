@@ -1,3 +1,7 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Offices.Queries.GetById;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public record GetOfficeByIdQuery();
+namespace oneparalyzer.ProjectManager.Application.Offices.Queries.GetById;
+
+public record GetOfficeByIdQuery(
+    Guid Id) : IRequest<Result<GetOfficeByIdModel>>;

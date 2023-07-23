@@ -1,6 +1,6 @@
 ﻿namespace oneparalyzer.ProjectManager.Application.Posts.Commands.Create;
 
-public class CreatePostCommandHandler
+public sealed class CreatePostCommandHandler
 {
     
 }

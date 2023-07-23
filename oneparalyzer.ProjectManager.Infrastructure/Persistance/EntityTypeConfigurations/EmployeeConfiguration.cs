@@ -34,16 +34,19 @@ public sealed class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.OwnsOne(x => x.FullName)
             .Property(x => x.Surname)
             .HasColumnName("Surname")
+            .HasMaxLength(50)
             .IsRequired();
 
         builder.OwnsOne(x => x.FullName)
             .Property(x => x.Name)
             .HasColumnName("Name")
+            .HasMaxLength(50)
             .IsRequired();
 
         builder.OwnsOne(x => x.FullName)
             .Property(x => x.Patronymic)
             .HasColumnName("Patronymic")
+            .HasMaxLength(50)
             .IsRequired();
 
         builder.HasMany<Project>().WithOne().HasForeignKey(x => x.EmployeeId);

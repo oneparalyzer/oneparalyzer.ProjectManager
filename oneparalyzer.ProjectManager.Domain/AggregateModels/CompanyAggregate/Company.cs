@@ -11,4 +11,9 @@ public sealed class Company : AggregateRoot<CompanyId>
     }
 
     public string Title { get; private set; }
+
+    public void Update(string newTitle)
+    {
+        Title = newTitle;
+    }
 }

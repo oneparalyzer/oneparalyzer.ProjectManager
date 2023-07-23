@@ -19,7 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Offices\" />
+    <Folder Include="Posts\Commands\RemoveById\" />
+    <Folder Include="Posts\Commands\Update\" />
+    <Folder Include="Posts\Queries\GetById\" />
+    <Folder Include="Posts\Queries\GetByPage\" />
   </ItemGroup>
 
 </Project>

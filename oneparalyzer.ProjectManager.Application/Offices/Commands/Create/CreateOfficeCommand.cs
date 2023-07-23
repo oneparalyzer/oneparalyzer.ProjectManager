@@ -1,3 +1,8 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Offices.Commands.Create;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public record CreateOfficeCommand();
+namespace oneparalyzer.ProjectManager.Application.Offices.Commands.Create;
+
+public record CreateOfficeCommand(
+    string Title,
+    Guid CompanyId) : IRequest<SimpleResult>;

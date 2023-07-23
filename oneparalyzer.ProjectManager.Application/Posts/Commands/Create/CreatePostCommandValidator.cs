@@ -1,6 +1,6 @@
 ﻿namespace oneparalyzer.ProjectManager.Application.Posts.Commands.Create;
 
-public class CreatePostCommandValidator
+public sealed class CreatePostCommandValidator
 {
     
 }
