@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using oneparalyzer.ProjectManager.Application.Companies.Commands.Create;
 using oneparalyzer.ProjectManager.Application.Companies.Commands.RemoveById;
+using oneparalyzer.ProjectManager.Application.Companies.Commands.Update;
 using oneparalyzer.ProjectManager.Application.Companies.Queries.GetById;
 using oneparalyzer.ProjectManager.Application.Companies.Queries.GetByPage;
 
@@ -43,6 +44,13 @@ public class CompanyController : ControllerBase
     public async Task<IActionResult> GetByPageAsync(Guid id)
     {
         var result = await _mediator.Send(new GetCompanyByIdQuery(id));
+        return Ok(result);
+    }
+
+    [HttpPost("update")]
+    public async Task<IActionResult> UpdateAsync(UpdateCompanyCommand request)
+    {
+        var result = await _mediator.Send(request);
         return Ok(result);
     }
 }
