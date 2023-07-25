@@ -4,34 +4,34 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using oneparalyzer.ProjectManager.Application.Common.Interfaces;
-using oneparalyzer.ProjectManager.Domain.AggregateModels.EmployeeAggregate;
-using oneparalyzer.ProjectManager.Domain.AggregateModels.EmployeeAggregate.ValueObjects;
+using oneparalyzer.ProjectManager.Domain.AggregateModels.PostAggregate;
+using oneparalyzer.ProjectManager.Domain.AggregateModels.PostAggregate.ValueObjects;
 using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-namespace oneparalyzer.ProjectManager.Application.Employees.Queries.GetById;
+namespace oneparalyzer.ProjectManager.Application.Posts.Queries.GetById;
 
-public sealed class GetEmployeeByIdQueryHandler : IRequestHandler<GetEmployeeByIdQuery, Result<GetEmployeeByIdModel>>
+public sealed class GetPostByIdQueryHandler : IRequestHandler<GetPostByIdQuery, Result<GetPostByIdModel>>
 {
     private readonly IMapper _mapper;
     private readonly IApplicationDbContext _context;
-    private readonly IValidator<GetEmployeeByIdQuery> _validator;
-    private readonly ILogger<GetEmployeeByIdQueryHandler> _logger;
+    private readonly IValidator<GetPostByIdQuery> _validator;
+    private readonly ILogger<GetPostByIdQueryHandler> _logger;
 
-    public GetEmployeeByIdQueryHandler(
+    public GetPostByIdQueryHandler(
         IMapper mapper,
         IApplicationDbContext context,
-        IValidator<GetEmployeeByIdQuery> validator,
-        ILogger<GetEmployeeByIdQueryHandler> logger)
+        IValidator<GetPostByIdQuery> validator,
+        ILogger<GetPostByIdQueryHandler> logger)
     {
         _mapper = mapper;
         _context = context;
         _validator = validator;
         _logger = logger;
     }
-    
-    public async Task<Result<GetEmployeeByIdModel>> Handle(GetEmployeeByIdQuery request, CancellationToken cancellationToken)
+
+    public async Task<Result<GetPostByIdModel>> Handle(GetPostByIdQuery request, CancellationToken cancellationToken)
     {
-        var result = new Result<GetEmployeeByIdModel>();
+        var result = new Result<GetPostByIdModel>();
 
         try
         {
@@ -42,19 +42,20 @@ public sealed class GetEmployeeByIdQueryHandler : IRequestHandler<GetEmployeeByI
                 return result;
             }
 
-            Employee? existingEmployee = await _context.Employees
+            Post? existingPost = await _context.Posts
                 .FirstOrDefaultAsync(x =>
-                        x.Id == EmployeeId.Create(request.Id),
+                    x.Id == PostId.Create(request.Id),
                     cancellationToken);
-            if (existingEmployee is null)
+            if (existingPost is null)
             {
-                result.AddError("Сотрудник не найден.");
+                result.AddError("Должность не найдена.");
                 return result;
             }
 
-            GetEmployeeByIdModel employeeModel = _mapper.Map<GetEmployeeByIdModel>(existingEmployee);
+            GetPostByIdModel postModel = _mapper.Map<GetPostByIdModel>(existingPost);
 
-            result.Data = employeeModel;
+            result.Data = postModel;
+
             return result;
         }
         catch (Exception ex)

@@ -1,6 +1,8 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Employees.Queries.GetByPage;
+﻿using oneparalyzer.ProjectManager.Application.Employees.Queries.GetById;
 
-public class GetEmployeesByPageModel
+namespace oneparalyzer.ProjectManager.Application.Employees.Queries.GetByPage;
+
+public class GetEmployeesByPageModel : GetEmployeeByIdModel
 {
     
 }

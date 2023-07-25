@@ -64,20 +64,51 @@ public sealed class Project : AggregateRoot<ProjectId>
 
         return result;
     }
+    
+    public SimpleResult UpdateProjectTask(ProjectTask newProjectTask)
+    {
+        var result = new SimpleResult();
+
+        ProjectTask? existingProjectTask = _projectTasks
+            .FirstOrDefault(x => 
+                x.Id == newProjectTask.Id);
+        if (existingProjectTask is null)
+        {
+            result.AddError("Задача не найдена.");
+            return result;
+        }
+        
+        return result;
+    }
 
     public SimpleResult CompleteProjectTaskById(ProjectTaskId projectTaskId)
     {
         var result = new SimpleResult();
 
-        ProjectTask? existingProjectTask = _projectTasks.FirstOrDefault(x => x.Id == projectTaskId);
+        ProjectTask? existingProjectTask = _projectTasks
+            .FirstOrDefault(x => 
+                x.Id == projectTaskId);
         if (existingProjectTask is null)
         {
             result.AddError("Задача не найдена.");
             return result;
         }
 
-        _projectTasks.FirstOrDefault(existingProjectTask).Complete();
+        
 
         return result;
+    }
+
+    public bool IsCompleted()
+    {
+        ProjectTask? notCompletedProjectTask = _projectTasks
+            .FirstOrDefault(x =>
+                x.IsCompleted == false);
+        if (notCompletedProjectTask is null)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

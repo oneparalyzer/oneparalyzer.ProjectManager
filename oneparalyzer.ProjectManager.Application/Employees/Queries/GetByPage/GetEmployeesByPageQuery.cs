@@ -1,3 +1,9 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Employees.Queries.GetByPage;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public record GetEmployeesByPageQuery();
+namespace oneparalyzer.ProjectManager.Application.Employees.Queries.GetByPage;
+
+public record GetEmployeesByPageQuery(
+    int PageSize,
+    int PageNumber,
+    Guid PostId) : IRequest<Result<IEnumerable<GetEmployeesByPageModel>>>;

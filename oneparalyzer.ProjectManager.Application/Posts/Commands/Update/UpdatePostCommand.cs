@@ -1,3 +1,9 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Posts.Commands.Update;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public record UpdatePostCommand();
+namespace oneparalyzer.ProjectManager.Application.Posts.Commands.Update;
+
+public record UpdatePostCommand(
+    Guid Id,
+    string NewTitle,
+    Guid NewDepartmentId) : IRequest<SimpleResult>;

@@ -1,5 +1,7 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Projects.Commands.Create;
+﻿using FluentValidation;
 
-public sealed class CreateProjectCommandValidator
+namespace oneparalyzer.ProjectManager.Application.Projects.Commands.Create;
+
+public sealed class CreateProjectCommandValidator : AbstractValidator<CreateProjectCommand>
 {
 }

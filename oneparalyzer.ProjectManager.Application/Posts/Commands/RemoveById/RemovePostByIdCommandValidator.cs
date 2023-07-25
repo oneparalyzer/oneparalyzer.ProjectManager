@@ -1,6 +1,11 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Posts.Commands.RemoveById;
+﻿using FluentValidation;
 
-public class RemovePostByIdCommandValidator
+namespace oneparalyzer.ProjectManager.Application.Posts.Commands.RemoveById;
+
+public sealed class RemovePostByIdCommandValidator : AbstractValidator<RemovePostByIdCommand>
 {
-    
+    public RemovePostByIdCommandValidator()
+    {
+        RuleFor(x => x.Id).NotEqual(Guid.Empty);
+    }
 }

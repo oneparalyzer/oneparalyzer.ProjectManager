@@ -1,3 +1,7 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Employees.Queries.GetById;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public record GetEmployeeByIdQuery();
+namespace oneparalyzer.ProjectManager.Application.Employees.Queries.GetById;
+
+public record GetEmployeeByIdQuery(
+    Guid Id) : IRequest<Result<GetEmployeeByIdModel>>;

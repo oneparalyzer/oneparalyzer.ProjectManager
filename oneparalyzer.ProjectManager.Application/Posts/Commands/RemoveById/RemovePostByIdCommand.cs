@@ -1,3 +1,7 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Posts.Commands.RemoveById;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public record RemovePostByIdCommand();
+namespace oneparalyzer.ProjectManager.Application.Posts.Commands.RemoveById;
+
+public record RemovePostByIdCommand(
+    Guid Id) : IRequest<SimpleResult>;

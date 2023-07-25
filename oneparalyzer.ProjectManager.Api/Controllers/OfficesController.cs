@@ -8,7 +8,9 @@ using oneparalyzer.ProjectManager.Application.Offices.Queries.GetByPage;
 
 namespace oneparalyzer.ProjectManager.Api.Controllers;
 
-public class OfficesController : ControllerBase
+[Route("offices")]
+[ApiController]
+public sealed class OfficesController : ControllerBase
 {
     private readonly ISender _mediator;
 

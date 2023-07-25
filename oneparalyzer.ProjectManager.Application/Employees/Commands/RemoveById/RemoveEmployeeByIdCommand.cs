@@ -1,3 +1,7 @@
-﻿namespace oneparalyzer.ProjectManager.Application.Employees.Commands.RemoveById;
+﻿using MediatR;
+using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
-public record RemoveEmployeeByIdCommand();
+namespace oneparalyzer.ProjectManager.Application.Employees.Commands.RemoveById;
+
+public record RemoveEmployeeByIdCommand(
+    Guid Id) : IRequest<SimpleResult>;
