@@ -13,17 +13,17 @@ using oneparalyzer.ProjectManager.Domain.Common.OperationResults;
 
 namespace oneparalyzer.ProjectManager.Application.Posts.Queries.GetByPage;
 
-public sealed class GetPostsByPageQueryHandler : IRequestHandler<GetPostsByPageQuery, Result<IEnumerable<GetPostsByPageModel>>>
+public sealed class GetPostsByPageQueryHandler : IRequestHandler<GetProjectsByPageQuery, Result<IEnumerable<GetPostsByPageModel>>>
 {
     private readonly IMapper _mapper;
     private readonly IApplicationDbContext _context;
-    private readonly IValidator<GetPostsByPageQuery> _validator;
+    private readonly IValidator<GetProjectsByPageQuery> _validator;
     private readonly ILogger<GetPostsByPageQueryHandler> _logger;
 
     public GetPostsByPageQueryHandler(
         IMapper mapper,
         IApplicationDbContext context,
-        IValidator<GetPostsByPageQuery> validator,
+        IValidator<GetProjectsByPageQuery> validator,
         ILogger<GetPostsByPageQueryHandler> logger)
     {
         _mapper = mapper;
@@ -32,7 +32,7 @@ public sealed class GetPostsByPageQueryHandler : IRequestHandler<GetPostsByPageQ
         _logger = logger;
     }
 
-    public async Task<Result<IEnumerable<GetPostsByPageModel>>> Handle(GetPostsByPageQuery request, CancellationToken cancellationToken)
+    public async Task<Result<IEnumerable<GetPostsByPageModel>>> Handle(GetProjectsByPageQuery request, CancellationToken cancellationToken)
     {
         var result = new Result<IEnumerable<GetPostsByPageModel>>();
 

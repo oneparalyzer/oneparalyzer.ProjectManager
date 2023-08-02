@@ -20,10 +20,8 @@ public sealed class Employee : AggregateRoot<EmployeeId>
     public PostId PostId { get; private set; }
     public UserId UserId { get; private set; }
 
-    public void Update(FullName newFullName, PostId newPostId, UserId newUserId)
+    public void Update(FullName newFullName)
     {
         FullName = newFullName;
-        PostId = newPostId;
-        UserId = newUserId;
     }
 }

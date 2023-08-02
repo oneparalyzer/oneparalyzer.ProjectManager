@@ -21,8 +21,15 @@ public sealed class Project : AggregateRoot<ProjectId>
 
     public string Title { get; private set; }
     public EmployeeId EmployeeId { get; private set; }
+    public DateTime DateStart { get; private set; } = DateTime.UtcNow;
+    public DateTime? UpdatedDate { get; private set; }
 
     public IReadOnlyList<ProjectTask> ProjectTasks => _projectTasks.AsReadOnly();
+
+    public void Update(string newTitle)
+    {
+        Title = newTitle;
+    }
 
     public SimpleResult AddProjectTask(ProjectTask projectTask)
     {
@@ -78,6 +85,7 @@ public sealed class Project : AggregateRoot<ProjectId>
             return result;
         }
         
+        UpdatedDate = DateTime.UtcNow;
         return result;
     }
 

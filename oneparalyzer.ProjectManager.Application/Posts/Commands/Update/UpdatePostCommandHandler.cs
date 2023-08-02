@@ -39,15 +39,6 @@ public sealed class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand
                 result.AddValidationErrors(validationResult.ToDictionary());
                 return result;
             }
-
-            Department? existingDepartment = await _context.Departments
-                .FirstOrDefaultAsync(x =>
-                    x.Id == DepartmentId.Create(request.NewDepartmentId),
-                    cancellationToken);
-            if (existingDepartment is null)
-            {
-                result.AddError("Структурное подразделение не найдено.");
-            }
             
             Post? existingPost = await _context.Posts
                 .FirstOrDefaultAsync(x =>
@@ -56,14 +47,11 @@ public sealed class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand
             if (existingPost is null)
             {
                 result.AddError("Должность не найдена.");
-            }
-
-            if (!result.Succeed)
-            {
                 return result;
             }
+
             
-            existingPost.Update(request.NewTitle, DepartmentId.Create(request.NewDepartmentId));
+            existingPost.Update(request.NewTitle);
             _context.Posts.Update(existingPost);
             await _context.SaveChangesAsync(cancellationToken);
             

@@ -47,22 +47,10 @@ public sealed class UpdateOfficeCommandHandler : IRequestHandler<UpdateOfficeCom
             if (existingOffice is null)
             {
                 result.AddError("Офис не найден.");
-            }
-
-            Company? existingCompany = await _context.Companies.FirstOrDefaultAsync(x =>
-                    x.Id == CompanyId.Create(request.NewCompanyId),
-                cancellationToken);
-            if (existingCompany is null)
-            {
-                result.AddError("Компания не найдена.");
-            }
-
-            if (!result.Succeed)
-            {
                 return result;
             }
             
-            existingOffice.Update(request.NewTitle, CompanyId.Create(request.NewCompanyId));
+            existingOffice.Update(request.NewTitle);
 
             _context.Offices.Update(existingOffice);
             await _context.SaveChangesAsync(cancellationToken);

@@ -17,9 +17,8 @@ public sealed class Post : AggregateRoot<PostId>
     public string Title { get; private set; }
     public DepartmentId DepartmentId { get; private set; }
 
-    public void Update(string newTitle, DepartmentId newDepartmentId)
+    public void Update(string newTitle)
     {
         Title = newTitle;
-        DepartmentId = newDepartmentId;
     }
 }

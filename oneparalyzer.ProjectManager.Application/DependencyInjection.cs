@@ -27,6 +27,14 @@ using oneparalyzer.ProjectManager.Application.Employees.Commands.Update;
 using oneparalyzer.ProjectManager.Application.Employees.Queries.GetById;
 using oneparalyzer.ProjectManager.Application.Employees.Queries.GetByPage;
 using oneparalyzer.ProjectManager.Application.Projects.Commands.Create;
+using oneparalyzer.ProjectManager.Application.Projects.Commands.RemoveById;
+using oneparalyzer.ProjectManager.Application.Projects.Commands.Update;
+using oneparalyzer.ProjectManager.Application.Projects.Queries.GetById;
+using oneparalyzer.ProjectManager.Application.ProjectTasks.Commands.CompleteById;
+using oneparalyzer.ProjectManager.Application.Projects.Queries.GetCompletedByPage;
+using oneparalyzer.ProjectManager.Application.ProjectTasks.Commands.Add;
+using oneparalyzer.ProjectManager.Application.ProjectTasks.Commands.Update;
+using oneparalyzer.ProjectManager.Application.ProjectTasks.Commands.RemoveById;
 
 namespace oneparalyzer.ProjectManager.Application;
 
@@ -49,6 +57,7 @@ public static class DependencyInjection
         services.AddPostValidation();
         services.AddEmployeeValidation();
         services.AddProjectValidation();
+        services.AddProjectTaskValidation();
         
         return services;
     }
@@ -92,7 +101,7 @@ public static class DependencyInjection
         services.AddTransient<IValidator<RemovePostByIdCommand>, RemovePostByIdCommandValidator>();
         services.AddTransient<IValidator<UpdatePostCommand>, UpdatePostCommandValidator>();
         services.AddTransient<IValidator<GetPostByIdQuery>, GetPostByIdQueryValidator>();
-        services.AddTransient<IValidator<GetPostsByPageQuery>, GetPostsByPageQueryValidator>();
+        services.AddTransient<IValidator<GetProjectsByPageQuery>, GetPostsByPageQueryValidator>();
         
         return services;
     }
@@ -111,7 +120,21 @@ public static class DependencyInjection
     private static IServiceCollection AddProjectValidation(this IServiceCollection services)
     {
         services.AddTransient<IValidator<CreateProjectCommand>, CreateProjectCommandValidator>();
+        services.AddTransient<IValidator<RemoveProjectByIdCommand>, RemoveProjectByIdCommandValidator>();
+        services.AddTransient<IValidator<UpdateProjectCommand>, UpdateProjectCommandValidator>();
+        services.AddTransient<IValidator<GetProjectByIdQuery>, GetProjectByIdQueryValidator>();
+        services.AddTransient<IValidator<GetCompletedProjectsByPageQuery>, GetCompletedProjectsByPageQueryValidator>();
         
+        return services;
+    }
+
+    private static IServiceCollection AddProjectTaskValidation(this IServiceCollection services)
+    {
+        services.AddTransient<IValidator<CompleteProjectTaskByIdCommand>, CompleteProjectTaskByIdCommandValidator>();
+        services.AddTransient < IValidator<AddProjectTaskCommand>, AddProjectTaskCommandValidator>();
+        services.AddTransient<IValidator<UpdateProjectTaskCommand>, UpdateProjectTaskCommandValidator>();
+        services.AddTransient<IValidator<RemoveProjectTaskByIdCommand>, RemoveProjectTaskByIdCommandValidator>();
+
         return services;
     }
 }

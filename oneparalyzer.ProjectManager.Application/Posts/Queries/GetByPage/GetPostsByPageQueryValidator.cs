@@ -2,7 +2,7 @@
 
 namespace oneparalyzer.ProjectManager.Application.Posts.Queries.GetByPage;
 
-public sealed class GetPostsByPageQueryValidator : AbstractValidator<GetPostsByPageQuery>
+public sealed class GetPostsByPageQueryValidator : AbstractValidator<GetProjectsByPageQuery>
 {
     public GetPostsByPageQueryValidator()
     {

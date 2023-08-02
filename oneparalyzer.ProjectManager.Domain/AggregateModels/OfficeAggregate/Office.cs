@@ -17,9 +17,8 @@ public sealed class Office : AggregateRoot<OfficeId>
     public string Title { get; private set; }
     public CompanyId CompanyId { get; private set; }
 
-    public void Update(string newTitle, CompanyId newCompanyId)
+    public void Update(string newTitle)
     {
         Title = newTitle;
-        CompanyId = newCompanyId;
     }
 }

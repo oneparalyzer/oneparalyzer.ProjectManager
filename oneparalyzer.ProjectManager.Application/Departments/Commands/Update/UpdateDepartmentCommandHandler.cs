@@ -47,23 +47,10 @@ public sealed class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepar
             if (existingDepartment is null)
             {
                 result.AddError("Структурное подразделение не найдено");
-            }
-
-            Office? existingOffice = await _context.Offices
-                .FirstOrDefaultAsync(x =>
-                    x.Id == OfficeId.Create(request.NewOfficeId),
-                    cancellationToken);
-            if (existingOffice is null)
-            {
-                result.AddError("Офис не найден");
-            }
-
-            if (!result.Succeed)
-            {
                 return result;
             }
             
-            existingDepartment.Update(request.NewTitle, OfficeId.Create(request.NewOfficeId));
+            existingDepartment.Update(request.NewTitle);
             _context.Departments.Update(existingDepartment);
             await _context.SaveChangesAsync(cancellationToken);
 

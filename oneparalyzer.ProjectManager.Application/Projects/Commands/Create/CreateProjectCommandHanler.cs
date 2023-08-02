@@ -40,7 +40,6 @@ public sealed class CreateProjectCommandHanler : IRequestHandler<CreateProjectCo
                     ProjectTaskId.Create(),
                     requestProjectTask.Number,
                     requestProjectTask.Description,
-                    requestProjectTask.IsCompleted,
                     EmployeeId.Create(requestProjectTask.ResponsibleEmployeeId)));
             }
 

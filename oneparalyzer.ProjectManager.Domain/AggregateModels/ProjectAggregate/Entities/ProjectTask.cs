@@ -10,18 +10,16 @@ public sealed class ProjectTask : Entity<ProjectTaskId>
         ProjectTaskId id,
         int number,
         string description,
-        bool isCompleted,
         EmployeeId responsibleEmployeeId) : base(id)
     {
         Number = number;
         Description = description;
-        IsCompleted = isCompleted;
         ResponsibleEmployeeId = responsibleEmployeeId;
     }
 
     public int Number { get; private set; }
     public string Description { get; private set; }
-    public bool IsCompleted { get; private set; }
+    public bool IsCompleted { get; private set; } = false;
     public EmployeeId ResponsibleEmployeeId { get; private set; }
 
     public void Complete()

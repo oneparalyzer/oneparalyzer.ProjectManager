@@ -26,6 +26,8 @@ public sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
                 value => EmployeeId.Create(value));
 
         builder.Property(x => x.Title).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.UpdatedDate).IsRequired();
+        builder.Property(x => x.DateStart).IsRequired();
 
         builder.HasMany(x => x.ProjectTasks).WithOne();
     }

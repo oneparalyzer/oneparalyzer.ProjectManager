@@ -16,6 +16,14 @@ public class SimpleResult
             _errors.Add(error);
         }
     }
+    
+    public void AddErrors(List<string> errors)
+    {
+        foreach (string error in errors)
+        {
+            AddError(error);
+        }
+    }
 
     public void AddValidationErrors(IDictionary<string, string[]> validationErrors)
     {

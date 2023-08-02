@@ -5,5 +5,4 @@ namespace oneparalyzer.ProjectManager.Application.Departments.Commands.Update;
 
 public record UpdateDepartmentCommand(
     Guid Id,
-    string NewTitle,
-    Guid NewOfficeId) : IRequest<SimpleResult>;
+    string NewTitle) : IRequest<SimpleResult>;

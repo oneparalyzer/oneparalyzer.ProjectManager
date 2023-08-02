@@ -41,15 +41,6 @@ public sealed class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmploye
                 return result;
             }
 
-            Post? existinfPost = await _context.Posts
-                .FirstOrDefaultAsync(x =>
-                        x.Id == PostId.Create(request.PostId),
-                    cancellationToken);
-            if (existinfPost is null)
-            {
-                result.AddError("Должность не найдена.");
-            }
-
             Employee? existingEmployee = await _context.Employees
                 .FirstOrDefaultAsync(x =>
                         x.Id == EmployeeId.Create(request.Id),
@@ -57,10 +48,6 @@ public sealed class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmploye
             if (existingEmployee is null)
             {
                 result.AddError("Работник не найдена.");
-            }
-
-            if (!result.Succeed)
-            {
                 return result;
             }
             
@@ -68,9 +55,7 @@ public sealed class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmploye
                 new FullName(
                     request.Surname,
                     request.Name,
-                    request.Patronymic),
-                PostId.Create(request.PostId), 
-                UserId.Create(request.UserId));
+                    request.Patronymic));
 
             _context.Employees.Update(existingEmployee);
             await _context.SaveChangesAsync(cancellationToken);

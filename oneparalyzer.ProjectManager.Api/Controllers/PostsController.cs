@@ -35,7 +35,7 @@ public sealed class PostsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> GetByPageAsync(GetPostsByPageQuery request)
+    public async Task<IActionResult> GetByPageAsync(GetProjectsByPageQuery request)
     {
         var result = await _mediator.Send(request);
         return Ok(result);
